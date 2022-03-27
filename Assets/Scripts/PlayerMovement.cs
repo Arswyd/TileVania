@@ -10,6 +10,9 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] float jumpSpeed = 12f;
     [SerializeField] float climbingSpeed = 5f;
     [SerializeField] Vector2 deathKick = new Vector2(0f, 10f);
+    [SerializeField] GameObject bullet;
+    [SerializeField] Transform gun;
+    [SerializeField] float levelLoadDelay = 2f;
  
     Vector2 moveInput;
     Rigidbody2D myRigidbody;
@@ -100,6 +103,20 @@ public class PlayerMovement : MonoBehaviour
             myRigidbody.velocity = deathKick;
             myFeetCollider.enabled = false;
             myBodyCollider.enabled = false;
+
+            StartCoroutine(StartPlayerDeath());
         }
+    }
+
+    IEnumerator StartPlayerDeath()
+    {
+        yield return new WaitForSecondsRealtime(levelLoadDelay);
+        FindObjectOfType<GameSession>().ProcessPlayerDeath();
+    }
+
+    void OnFire(InputValue value)
+    {
+        if(!isAlive) { return; }
+        Instantiate(bullet, gun.position, transform.rotation);
     }
 }

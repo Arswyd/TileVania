@@ -191,6 +191,7 @@ MonoBehaviour:
   runSpeed: 7
   jumpSpeed: 12
   climbingSpeed: 5
+  bounceSpeed: 16
   deathKick: {x: 0, y: 10}
   bullet: {fileID: 6149195023769344471, guid: 13b445cc5f91d984aa41322019b9404a, type: 3}
   gun: {fileID: 9126394106504719286}

@@ -9,10 +9,11 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] float runSpeed = 7f;
     [SerializeField] float jumpSpeed = 12f;
     [SerializeField] float climbingSpeed = 5f;
+    [SerializeField] float bounceSpeed = 16f;
     [SerializeField] Vector2 deathKick = new Vector2(0f, 10f);
     [SerializeField] GameObject bullet;
     [SerializeField] Transform gun;
-    [SerializeField] float levelLoadDelay = 2f;
+    [SerializeField] float levelLoadDelay = 1f;
  
     Vector2 moveInput;
     Rigidbody2D myRigidbody;
@@ -38,6 +39,7 @@ public class PlayerMovement : MonoBehaviour
         FlipSprite();
         ClimbLadder();
         Die();
+        Bounce();
     }
 
     void OnMove(InputValue value) 
@@ -105,6 +107,15 @@ public class PlayerMovement : MonoBehaviour
             myBodyCollider.enabled = false;
 
             StartCoroutine(StartPlayerDeath());
+        }
+    }
+
+    void Bounce()
+    {
+        if(myFeetCollider.IsTouchingLayers(LayerMask.GetMask("Bouncing")))
+        {
+            Vector2 playerVelocity = new Vector2(myRigidbody.velocity.x, bounceSpeed);
+            myRigidbody.velocity = playerVelocity;
         }
     }
 

@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -25,8 +24,13 @@ public class LevelExit : MonoBehaviour
         {
             nextSceneIndex = 0;
         }
-        
         FindObjectOfType<ScenePersist>().ResetScenePersist();
+      
         SceneManager.LoadScene(nextSceneIndex);
+
+        if (nextSceneIndex == 4)
+        {
+            FindObjectOfType<GameSession>().WriteFinishText();
+        }
     }
 }

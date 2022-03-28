@@ -1,6 +1,3 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using TMPro;
@@ -10,6 +7,7 @@ public class GameSession : MonoBehaviour
     [SerializeField] int playerLives = 3;
     [SerializeField] TextMeshProUGUI livesText;
     [SerializeField] TextMeshProUGUI scoreText;
+    [SerializeField] TextMeshProUGUI finishText;
 
     int playerScore = 0;
 
@@ -48,6 +46,11 @@ public class GameSession : MonoBehaviour
     {
         playerScore += pointsToAdd;
         scoreText.text = playerScore.ToString();
+    }
+
+    public void WriteFinishText()
+    {
+        finishText.enabled = true;
     }
 
     void TakeLife()

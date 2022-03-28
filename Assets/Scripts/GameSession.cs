@@ -50,7 +50,8 @@ public class GameSession : MonoBehaviour
 
     public void WriteFinishText()
     {
-        finishText.enabled = true;
+        Debug.Log("asd");
+        finishText.gameObject.SetActive(true);
     }
 
     void TakeLife()
